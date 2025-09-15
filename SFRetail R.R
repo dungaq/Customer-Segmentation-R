@@ -29,7 +29,7 @@ SmartFresh_Retail.df$Num_Dependents <- SmartFresh_Retail.df$Kidhome + SmartFresh
 # Check the new column
 table(SmartFresh_Retail.df$Num_Dependents)
 
-# Optional: Remove the original columns if they are no longer needed
+# Remove the original columns as they are no longer needed
 SmartFresh_Retail.df$Kidhome <- NULL
 SmartFresh_Retail.df$Teenhome <- NULL
 
@@ -85,60 +85,14 @@ for (spend_var in test_vars) {
     }
   }
 }
-# Convert matrix to dataframe for better readability
+# Convert matrix to dataframe
 levene_df <- as.data.frame(levene_matrix)
-# Print the matrix of Levene’s test p-values
-print(levene_df)
 
-
-# t-test on spending and shopping habit according to offer acceptance
-# Define variables
-spending_vars <- c("Spend_Wine", "Spend_OrganicFood", "Spend_Meat", "Spend_Treats", "Spend_LuxuryGoods")
-shopping_vars <- c("Purchases_Online", "Purchases_Catalog", "Purchases_Store", "Visits_OnlineLastMonth")
-offer_vars <- c("Accepted_Offer1", "Accepted_Offer2", "Accepted_Offer3", "Accepted_Offer4", "Accepted_Offer5","Response_Latest")
-# Combine spending and shopping variables
-test_vars <- c(spending_vars, shopping_vars)
-# Levene’s test matrix
-levene_results <- matrix(
-  c(0.000, 0.509, 0.264, 0.711, 0.001, 0.012, 0.000, 0.543, 0.202,
-    0.000, 0.890, 0.005, 0.185, 0.536, 0.493, 0.295, 0.232, 0.945,
-    0.081, 0.000, 0.000, 0.000, 0.000, 0.000, 0.656, 0.443, 0.000,
-    0.071, 0.000, 0.000, 0.624, 0.417, 0.010, 0.438, 0.108, 0.022,
-    0.085, 0.444, 0.395, 0.000, 0.000, 0.865, 0.561, 0.550, 0.910,
-    0.000, 0.000, 0.000, 0.000, 0.001, 0.638, 0.000, 0.353, 0.000 ),
-  nrow = length(test_vars), ncol = length(offer_vars), byrow = TRUE,
-  dimnames = list(test_vars, offer_vars)
-)
-View(levene_results)
-# Create an empty matrix to store t-test p-values
-t_test_matrix <- matrix(NA, nrow = length(test_vars), ncol = length(offer_vars),
-                        dimnames = list(test_vars, offer_vars))
-# Loop through each variable and perform t-tests
-for (spend_var in test_vars) {
-  for (offer_var in offer_vars) {
-    # Check if Levene's test p-value is available
-    levene_p_value <- levene_results[spend_var, offer_var]
-    # Run t-test only if both variables exist in the dataset
-    if (!is.na(levene_p_value) && spend_var %in% colnames(SmartFresh_Retail.df) && offer_var %in% colnames(SmartFresh_Retail.df)) {
-      # Choose standard or Welch’s t-test based on Levene’s result
-      t_test_result <- tryCatch({
-        t.test(as.formula(paste(spend_var, "~", offer_var)), data = SmartFresh_Retail.df, 
-               var.equal = (levene_p_value > 0.05))$p.value
-      }, error = function(e) NA)
-      # Store result in the matrix
-      t_test_matrix[spend_var, offer_var] <- t_test_result
-    }
-  }
-}
-# Convert matrix to dataframe for better readability
-t_test_df <- as.data.frame(t_test_matrix)
-# Print the matrix of T-Test p-values
-print(t_test_df)
+ 
 
 # III. Principle Components Analysis (PCA)
-View(SmartFresh_Retail.df)
 
-# Standardize only numeric columns
+# Standardize numeric columns
 numeric_cols <- sapply(SmartFresh_Retail.df, is.numeric)
 SF_Standardized.df <- SmartFresh_Retail.df  # Create a copy of the original dataset
 SF_Standardized.df[numeric_cols] <- lapply(SF_Standardized.df[numeric_cols], scale)
@@ -147,8 +101,7 @@ summary(SF_Standardized.df)
 # Select qualified variances from t-test results for PCA
 numeric_vars <- c("Annual_Income", "Spend_Wine",
                   "Spend_Meat" ,"Spend_LuxuryGoods", "Promo_Purchases", "Purchases_Online",
-                  "Purchases_Catalog", "Purchases_Store",
-                  "Age","Num_Dependents")
+                  "Purchases_Catalog", "Purchases_Store","Num_Dependents")
 
 df_pca <- SF_Standardized.df[numeric_vars]
 
@@ -164,7 +117,7 @@ library(ggplot2)
 library(factoextra)
 # Scree plot to visualize explained variance
 # Example PCA results
-explained_variance <- c(48.4, 14.4, 10.7, 7.7, 5.6, 4.5, 3.5, 2.8, 2.4)
+explained_variance <- c(50.8, 17.4, 8.0, 6.1, 5.1, 4.4, 3.4, 2.8, 2.0)
 # Calculate cumulative variance
 cumulative_variance <- cumsum(explained_variance)
 # Determine the number of PCs needed to exceed 80%
@@ -252,15 +205,7 @@ ggplot(plot_df, aes(x = K)) +
        y = "Total Within-Cluster Sum of Squares (WSS)",
        color = "Metric")
 
-
-
-
 kmeans_result <- kmeans(df_pca_kmeans, centers = 3, nstart = 50)
-
-
-
-
-
 
 
 

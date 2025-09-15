@@ -1,14 +1,14 @@
 
-# 🛒 Customer Segmentation with PCA & K-Means (SmartFresh Retail Case)
+# Customer Segmentation with PCA & K-Means (SmartFresh Retail Case)
 
 This project applies **Exploratory Data Analysis (EDA)**, **Principal Component Analysis (PCA)**, and **K-Means Clustering** in **R** to segment retail customers.
 It is based on the *SmartFresh Retail Case Study* completed during my MSc Business Analytics at the University of Birmingham.
 
-👉 [Full Report (PDF)] https://github.com/dungaq/customer-segmentation-R/blob/main/Final%20Report.pdf
+[Full Report (PDF)] https://github.com/dungaq/customer-segmentation-R/blob/main/Final%20Report.pdf
 
 ---
 
-## 📊 Project Overview
+## Project Overview
 
 * **Objective:** Identify customer segments to optimize marketing campaigns and improve retention.
 * **Dataset:** Retail customer demographics, spending patterns, and shopping channel usage.
@@ -21,7 +21,7 @@ It is based on the *SmartFresh Retail Case Study* completed during my MSc Busine
 
 ---
 
-## 🧑‍💻 How to Run the Code
+## How to Run the Code
 
 **1. Clone this repository:**
 
@@ -46,7 +46,7 @@ source("scripts/02_pca_kmeans.R")
 
 ---
 
-## 📈 Key Results
+## Key Results
 
 * **Three clusters identified:**
 

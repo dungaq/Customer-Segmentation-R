@@ -4,7 +4,7 @@
 This project applies **Exploratory Data Analysis (EDA)**, **Principal Component Analysis (PCA)**, and **K-Means Clustering** in **R** to segment retail customers.
 It is based on the *SmartFresh Retail Case Study* completed during my MSc Business Analytics at the University of Birmingham.
 
-👉 [Full Report (PDF)](SmartFresh%20Retail%20Case_Final.pdf)
+👉 [Full Report (PDF)] https://github.com/dungaq/customer-segmentation-R/blob/main/Final%20Report.pdf
 
 ---
 
@@ -54,20 +54,15 @@ source("scripts/02_pca_kmeans.R")
   2. **Budget-Conscious Promotion Seekers** → Coupon campaigns, in-store loyalty discounts.
   3. **Selective Online Luxury Shoppers** → Online luxury positioning, influencer marketing, personalized digital offers.
 
-* **Example Plot (Clusters in PCA space):**
-  ![](outputs/cluster_plot.png)
-
-👉 For interactive 3D visualizations, see [3D Cluster Plot (HTML)](outputs/3dplot.html).
-
 ---
 
-## 🗂 Repository Structure
+## Repository Structure
 
 ```
 customer-segmentation-R/
 │── scripts/               # R scripts for data cleaning, PCA, K-means
 │── outputs/               # Figures, cluster results, 3D plots (PNG/HTML/GIF)
-│── SmartFresh Retail Case_Final.pdf   # Full academic report
+│── Final report           # Full academic report
 │── README.md              # Project description (this file)
 │── .gitignore             # Ignore unnecessary files
 │── LICENSE                # License (MIT)
@@ -75,7 +70,7 @@ customer-segmentation-R/
 
 ---
 
-## 🚀 Skills Demonstrated
+## Skills Demonstrated
 
 * R programming (EDA, PCA, clustering, visualization).
 * Data preprocessing (outlier treatment, variable encoding, feature selection).
@@ -84,21 +79,9 @@ customer-segmentation-R/
 
 ---
 
-## 📚 References
 
-* Jollife & Cadima (2016) *Principal Component Analysis*.
-* Rousseeuw (1987) *Silhouettes for Cluster Validation*.
-* Kotler & Keller (2021) *Marketing Management*.
 
----
 
-## 📜 License
 
-This project is released under the [MIT License](LICENSE).
 
----
-
-👉 Giờ bạn chỉ cần copy từ dòng **# 🛒 Customer Segmentation...** đến hết, paste vào GitHub, rồi bấm **Commit changes**.
-
-Bạn có muốn mình làm thêm một bản README **ngắn gọn hơn** (tối giản, chỉ có mục tiêu + report PDF + kết quả chính) để bạn dùng khi cần portfolio gọn nhẹ không?
 
